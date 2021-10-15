@@ -12,8 +12,8 @@ code {
     monospace;
 }
 
-.ToDoList {
-  margin: 20px;
+.todoList {
+  border: 1px solid darkgray;
+  border-radius: 5px;
   padding: 20px;
-  border: 3px solid black;
 }

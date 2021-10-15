@@ -1,24 +1,23 @@
-import React from "react";
+import React from 'react';
 import {TaskType} from "./App";
 
-
 type ToDoListPropsType = {
-    title: string,
-    tasks: Array<TaskType>,
+    title:string;
+    tasks: Array<TaskType>
 }
 
-export function ToDoList(props: ToDoListPropsType) {
+function ToDoList (props: ToDoListPropsType) {
     return (
-        <div className="ToDoList">
+        <div className = 'todoList'>
             <h3>{props.title}</h3>
             <div>
                 <input/>
                 <button>+</button>
             </div>
             <ul>
-                <li><input type="checkbox" checked={true}/> <span>{props.tasks[0].title}</span></li>
-                <li><input type="checkbox" checked={true}/> <span>{props.tasks[1].title}</span></li>
-                <li><input type="checkbox" checked={true}/> <span>{props.tasks[2].title}</span></li>
+                <li><input type="checkbox" checked={props.tasks[0].isdone}/> <span>{props.tasks[0].title}</span></li>
+                <li><input type="checkbox" checked={props.tasks[1].isdone}/> <span>{props.tasks[1].title}</span></li>
+                <li><input type="checkbox" checked={props.tasks[2].isdone}/> <span>{props.tasks[2].title}</span></li>
             </ul>
             <div>
                 <button>All</button>
@@ -28,3 +27,5 @@ export function ToDoList(props: ToDoListPropsType) {
         </div>
     )
 }
+
+export default ToDoList;
