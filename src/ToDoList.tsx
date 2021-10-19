@@ -4,21 +4,31 @@ import {TaskType} from "./App";
 type ToDoListPropsType = {
     title:string;
     tasks: Array<TaskType>
+    removeTask: (taskID :number) => void
 }
 
-function ToDoList (props: ToDoListPropsType) {
+const ToDoList = (props: ToDoListPropsType)=> {
+    const tasksJSXElements = props.tasks.map(task=> {
+        return (
+            <li key={task.id}>
+            <input type="checkbox" checked={task.isdone}/>
+            <span>{task.title}</span>
+                <button onClick={()=>props.removeTask(task.id)}>x</button>
+            </li>
+        )
+
+    })
     return (
         <div className = 'todoList'>
             <h3>{props.title}</h3>
+            <ul>
+                {tasksJSXElements}
+            </ul>
             <div>
                 <input/>
                 <button>+</button>
             </div>
-            <ul>
-                <li><input type="checkbox" checked={props.tasks[0].isdone}/> <span>{props.tasks[0].title}</span></li>
-                <li><input type="checkbox" checked={props.tasks[1].isdone}/> <span>{props.tasks[1].title}</span></li>
-                <li><input type="checkbox" checked={props.tasks[2].isdone}/> <span>{props.tasks[2].title}</span></li>
-            </ul>
+
             <div>
                 <button>All</button>
                 <button>Active</button>
