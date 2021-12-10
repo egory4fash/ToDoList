@@ -14,7 +14,7 @@ function App() {
 
 
     let todolistID1 = v1();123123123123
-    let todolistID2 = v1();
+    let todolistID2 = v1();234234234
 
     let [todolists, setTodolists] = useState<Array<TodolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
