@@ -10,7 +10,7 @@ import {
     removeTodolistAC,
     TodolistsReducer
 } from "./reducers/TodolistsReducer";
-import {TasksReducer, updateTaskAC, removeTaskAC, addTaskAC, changeStatusAC} from "./reducers/TasksReducer";
+import {TasksReducer, updateTaskAC, removeTaskAC, addTaskAC, changeStatusAC, newTasksAC} from "./reducers/TasksReducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -33,7 +33,7 @@ function App() {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ])
 
-    let [tasks, tasksDispatch] = useReducer(TasksReducer,{
+    let [tasks, tasksDispatch] = useReducer(TasksReducer, {
         [todolistId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -48,29 +48,31 @@ function App() {
     });
 
     const updateTask = (todolistId: string, id: string, localTitle: string) => {
-        tasksDispatch(updateTaskAC(todolistId,id,localTitle))
+        tasksDispatch(updateTaskAC(todolistId, id, localTitle))
     }
 
     function removeTask(id: string, todolistId: string) {
-       tasksDispatch(removeTaskAC(id,todolistId))
+        tasksDispatch(removeTaskAC(id, todolistId))
     }
 
     const addTodolist = (title: string) => {
-        todolistsDispatch(addTodolistAC(title))
-        // setTasks({...tasks, [newID]: []})
+        let newID = v1()
 
+        todolistsDispatch(addTodolistAC(title, newID))
+        // setTasks({...tasks, [newID]: []})
+        tasksDispatch(newTasksAC(title,newID))
     }
 
     function addTask(title: string, todolistId: string) {
-        tasksDispatch(addTaskAC(title,todolistId))
+        tasksDispatch(addTaskAC(title, todolistId))
     }
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        tasksDispatch(changeStatusAC(id,isDone,todolistId))
+        tasksDispatch(changeStatusAC(id, isDone, todolistId))
     }
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
-        todolistsDispatch(changeFilterAC(value,todolistId))
+        todolistsDispatch(changeFilterAC(value, todolistId))
     }
 
     function removeTodolist(id: string) {

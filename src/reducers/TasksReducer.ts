@@ -10,7 +10,7 @@ type newTasksAC = ReturnType<typeof newTasksAC>
 
 
 
-export const TasksReducer = (state: TasksStateType, action: GeneralType) => {
+export const TasksReducer = (state: TasksStateType, action: GeneralType): TasksStateType => {
     switch (action.type) {
         case "UPDATE-TASK" : {
             return {...state,
@@ -40,8 +40,8 @@ export const TasksReducer = (state: TasksStateType, action: GeneralType) => {
             }
         }
         case "NEW-TASKS": {
-            let newTask = {id: v1(), title: "New Task", isDone: false}
-            return
+            return {...state, [action.payload.newID]:[]}
+
         }
         default:
             return state
@@ -49,7 +49,7 @@ export const TasksReducer = (state: TasksStateType, action: GeneralType) => {
 }
 
 export const updateTaskAC = (todolistId: string, id: string, localTitle: string) => {
-    return {
+    return 
         type: "UPDATE-TASK",
         payload: {
             todolistId: todolistId,
@@ -86,11 +86,12 @@ export const changeStatusAC = (id: string, isDone: boolean, todolistId: string) 
         }
     } as const
 }
-export const newTasksAC = (todolistID:string) => {
+export const newTasksAC = (title:string, newID:string) => {
     return {
         type: "NEW-TASKS",
         payload: {
-            todolistID: todolistID
+            title:title,
+            newID:newID
         }
     } as const
 }
