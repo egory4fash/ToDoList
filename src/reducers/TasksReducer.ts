@@ -1,12 +1,12 @@
 import { TasksStateType} from "../App";
 import {v1} from "uuid";
 
-type GeneralType = UpdateTaskACType | removeTaskAC | addTaskAC | changeStatusAC | newTasksAC
+type GeneralType = UpdateTaskACType | removeTaskACType | addTaskACType | changeStatusACType | newTasksACType
 type UpdateTaskACType = ReturnType<typeof updateTaskAC>
-type removeTaskAC = ReturnType<typeof removeTaskAC>
-type addTaskAC = ReturnType<typeof addTaskAC>
-type changeStatusAC = ReturnType<typeof changeStatusAC>
-type newTasksAC = ReturnType<typeof newTasksAC>
+type removeTaskACType = ReturnType<typeof removeTaskAC>
+type addTaskACType = ReturnType<typeof addTaskAC>
+type changeStatusACType = ReturnType<typeof changeStatusAC>
+type newTasksACType = ReturnType<typeof newTasksAC>
 
 
 
@@ -38,10 +38,10 @@ export const TasksReducer = (state: TasksStateType, action: GeneralType): TasksS
                 task.isDone = action.payload.isDone;
                 return {...state}
             }
+            return state;
         }
         case "NEW-TASKS": {
             return {...state, [action.payload.newID]:[]}
-
         }
         default:
             return state
@@ -49,7 +49,7 @@ export const TasksReducer = (state: TasksStateType, action: GeneralType): TasksS
 }
 
 export const updateTaskAC = (todolistId: string, id: string, localTitle: string) => {
-    return 
+    return {
         type: "UPDATE-TASK",
         payload: {
             todolistId: todolistId,
@@ -86,12 +86,11 @@ export const changeStatusAC = (id: string, isDone: boolean, todolistId: string) 
         }
     } as const
 }
-export const newTasksAC = (title:string, newID:string) => {
+export const newTasksAC = (newID:string) => {
     return {
-        type: "NEW-TASKS",
+        type: "NEW-TASKS" as const,
         payload: {
-            title:title,
-            newID:newID
+            newID
         }
     } as const
 }

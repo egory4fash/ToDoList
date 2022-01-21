@@ -56,11 +56,10 @@ function App() {
     }
 
     const addTodolist = (title: string) => {
-        let newID = v1()
-
+        let newID = "123"
         todolistsDispatch(addTodolistAC(title, newID))
         // setTasks({...tasks, [newID]: []})
-        tasksDispatch(newTasksAC(title,newID))
+        tasksDispatch(newTasksAC(newID))
     }
 
     function addTask(title: string, todolistId: string) {
